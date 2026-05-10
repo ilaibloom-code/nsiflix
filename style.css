@@ -1,0 +1,209 @@
+/* ============================================================
+   style.css — NSIFlix
+   Réalisé par Jules (design) — revu par Ilaï
+   ============================================================ */
+
+
+/* [JULES] body : style de base appliqué à TOUTE la page.
+   background: #141414 → noir Netflix (pas du vrai noir #000000, gris tres fonce, code  hexa pour la précision de la couleur).
+   un noir légèrement plus doux pour réduire la fatigue visuelle, apres des remarques d'amis qui m'ont dit que c'était trop foncé).
+   font-family: Arial → police classique.
+   padding: 20px → espace intérieur pour que le contenu ne colle pas aux bords. */
+body {
+    background: #141414;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+}
+
+
+/* [JULES] .container : bloc central qui limite la largeur à 600px
+   et se centre automatiquement avec margin: auto.
+   Sans cette règle, le contenu s'étirerait sur tout l'écran
+   et serait illisible sur grand écran. */
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+
+/* [JULES] .rouge : classe utilitaire simple exemple de ce qu'on peut faire :
+<p class="rouge gras centre"> on appelle les classes rouge gras centre sur Bonjour
+  Bonjour
+</p>
+   Elle applique la couleur rouge Netflix (#E50914) sur le texte.
+   Utilisée sur le titre h1 et les stats.
+   Avantage des classes : on évite de répéter color: #E50914 partout. */
+.rouge {
+    color: #E50914;
+}
+
+.video-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 315px; 
+    border-radius: 20px; /* ca fait des bords ronds */
+
+    /* 
+       iframe = "inline frame"
+       C'est une balise HTML qui permet d'afficher une page web DANS une autre page.
+       Ici, l'iframe affiche une vidéo YouTube directement dans ton site.
+        site = page principale
+        YouTube = page externe
+        iframe = "fenêtre intégrée" vers YouTube
+    */
+}
+
+/* [JULES] .vote-card : carte de vote avec fond légèrement plus clair que la page.
+   border-radius: 5px → coins arrondis pour un effet "carte" moderne.
+   margin-bottom: 20px → espace en bas pour séparer la carte des stats. */
+.vote-card {
+    background: #181818;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+/* [JULES] .etoile : chaque étoile (★) est un <span> stylé ici.
+   font-size: 40px → grande taille pour être facilement cliquable.
+   cursor: pointer → la souris devient une main au survol (indique que c'est cliquable).
+   color: #444 → gris foncé par défaut = "étoile vide / non sélectionnée". */
+.etoile {
+    font-size: 40px;
+    cursor: pointer;
+    color: #444;
+    transition: color 0.15s ease;
+    /* [ILAÏ] transition : animation douce lors du changement de couleur (0.15 secondes)
+    Effet de ease :
+    démarre doucement
+    accélère
+    ralentit à la fin
+    C'est plus naturel qu'une vitesse constante.
+       Quand JS ajoute/retire la classe .active, la couleur change progressivement
+       au lieu d'un changement brutal. */
+}
+
+
+/* [JULES + ILAÏ] .etoile.active : état "allumé" de l'étoile.
+   Cette classe est ajoutée/retirée dynamiquement par JavaScript
+   via classList.toggle('active', i < n).
+   color: #E50914 → rouge Netflix = étoile sélectionnée. */
+.etoile.active {
+    color: #E50914;
+}
+
+
+/* [JULES] Styles communs aux champs de saisie (input) et zone de texte (textarea).
+   width: 100% → prend toute la largeur du conteneur parent.
+   box-sizing: border-box → le padding est inclus dans la largeur déclarée.
+   Sans box-sizing, un input de width:100% + padding:12px dépasserait du conteneur. */
+input,
+textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    background: #333;
+    /* [JULES] Fond gris foncé pour les champs : contraste avec le fond de la carte (#181818)
+       tout en restant dans la palette sombre Netflix. */
+    border: 1px solid #444;
+    color: white;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+/* [JULES] Personnalisation du placeholder (texte d'aide dans les champs vides).
+   Sans ça, les navigateurs affichent le placeholder en gris clair par défaut,
+   ce qui peut avoir un mauvais contraste sur fond sombre.
+
+   Le :: (double deux-points) sert à cibler une partie visuelle
+   que le navigateur génère tout seul, sans qu'on ait écrit de balise pour elle.
+   Ici le placeholder n'existe pas dans le HTML : on n'a pas écrit
+   <placeholder>Ton prénom</placeholder>, c'est le navigateur qui l'affiche
+   automatiquement quand le champ est vide.
+   Sans ::placeholder, il est impossible de changer sa couleur —
+   c'est le seul moyen d'y accéder. */
+input::placeholder,
+textarea::placeholder {
+    color: #888;
+}
+
+
+/* [JULES] resize: vertical → l'utilisateur peut agrandir le textarea en hauteur seulement.
+   Par défaut, le textarea est redimensionnable dans toutes les directions,
+   ce qui peut casser la mise en page horizontale. */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+
+/* [JULES] button : bouton de soumission principal.
+   background: #E50914 → rouge Netflix, cohérent avec la charte graphique.
+   padding: 15px → grand bouton facile à cliquer.
+   font-weight: bold → texte bien visible, style "call to action" affirmé.
+   letter-spacing → léger espacement des lettres pour l'aspect "Netflix". */
+button {
+    background: #E50914;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+    /* [ILAÏ] transition : animation douce quand la couleur change au survol. */
+}
+
+/* [JULES] État du bouton quand la souris est dessus.
+   On assombrit légèrement le rouge pour un retour visuel au survol.
+   L'utilisateur comprend ainsi que le bouton est interactif.
+
+   Le : (simple deux-points) sert à cibler un état temporaire d'une balise.
+   Le bouton existe dans le HTML, mais son état "survolé" n'existe
+   que le temps que la souris est dessus.
+   Sans :hover, il faudrait écrire du JavaScript pour détecter le survol
+   et changer la couleur manuellement — CSS le fait seul. */
+button:hover {
+    background: #b8070f;
+}
+
+
+/* [JULES] hr : ligne de séparation horizontale.
+   Stylée pour s'intégrer dans la palette sombre. */
+hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+
+/* [JULES] .avis : carte d'un commentaire utilisateur.
+   border-left → barre rouge à gauche = signature visuelle Netflix.
+   C'est plus élégant qu'une bordure complète.
+   margin-top: 10px → espace entre les avis. */
+.avis {
+    border-left: 4px solid #E50914;
+    background: #222;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 0 3px 3px 0;
+}
+
+/* [JULES] .global-stats : section des statistiques globales. */
+.global-stats {
+    margin: 10px 0;
+}
+
+.global-stats h2 {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
